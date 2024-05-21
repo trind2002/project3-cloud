@@ -83,11 +83,11 @@ router.post('/',
       res.status(201).send(savedItem);
     });
 
-// export const FeedRouter: Router = router;
+const FeedRouter: Router = router;
 
 const router2: Router = Router();
 
-router2.use('/feed', router);
+router2.use('/feed', FeedRouter);
 
 router2.get('/', async (req: Request, res: Response) => {
   res.send(`V0`);

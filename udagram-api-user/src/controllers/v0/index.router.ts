@@ -115,16 +115,16 @@ router.get('/', async (req: Request, res: Response) => {
   res.send('auth');
 });
 
-export const AuthRouter: Router = router;
+const AuthRouter: Router = router;
 
 
-const router2: Router = Router();
+const routerIndex: Router = Router();
 
 
-router2.use('/users', router);
+routerIndex.use('/users', AuthRouter);
 
-router2.get('/', async (req: Request, res: Response) => {
+routerIndex.get('/', async (req: Request, res: Response) => {
   res.send(`V0`);
 });
 
-export const IndexRouter: Router = router;
+export const IndexRouter: Router = routerIndex;

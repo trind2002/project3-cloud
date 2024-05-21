@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-user
+  labels:
+    part: backend-user
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      part: backend-user
+  template:
+    metadata:
+      labels:
+        part: backend-user
+    spec:
+      volumes:
+        - name: aws-secret
+          secret:
+            secretName: aws-secret
+      containers:
+      - name: udagram-api-user
+        image: trind7/udagram-api-user
+        resources:
+          requests:
+            memory: "500Mi"
+            cpu: "250m"
+        volumeMounts:
+          - name: aws-secret
+            mountPath: "/root/.aws/"
+            readOnly: true
+        ports:
+        - containerPort: 5002
+        env:
+          - name: POSTGRES_USERNAME
+            valueFrom:
+              configMapKeyRef:
+                name: app-config-map
+                key: POSTGRES_USERNAME
+          - name: POSTGRES_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: app-config-map
+                key: POSTGRES_HOST
+          - name: POSTGRES_DB
+            valueFrom:
+              configMapKeyRef:
+                name: app-config-map
+                key: POSTGRES_DB
+          - name: AWS_BUCKET
+            valueFrom:
+              configMapKeyRef:
+                name: app-config-map
+                key: AWS_BUCKET
+          - name: AWS_REGION
+            valueFrom:
+              configMapKeyRef:
+                name: app-config-map
+                key: AWS_REGION
+          - name: AWS_PROFILE
+            valueFrom:
+              configMapKeyRef:
+                name: app-config-map
+                key: AWS_PROFILE
+          - name: URL
+            valueFrom:
+              configMapKeyRef:
+                name: app-config-map
+                key: URL
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: app-secrets
+                key: postgres_password
+          - name: JWT_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: app-secrets
+                key: jwt_secret

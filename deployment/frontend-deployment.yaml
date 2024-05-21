@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  labels:
+    part: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      part: frontend
+  template:
+    metadata:
+      labels:
+        part: frontend
+    spec:
+      containers:
+      - name: udagram-frontend
+        image: trind7/udagram-frontend
+        ports:
+        - containerPort: 80

@@ -12,6 +12,7 @@ jobs:
             name: Build and tag
             command: |
                 docker --version
+                echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
                 docker build -t udagram-api-feed:v1 ./udagram-api-feed
                 docker tag udagram-api-feed:v1 trind7/udagram-api-feed:v1
                 docker build -t udagram-api-user:v1 ./udagram-api-user  

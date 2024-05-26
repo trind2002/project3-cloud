@@ -1,0 +1,35 @@
+version: 2.1
+
+# Define the jobs we want to run for this project
+jobs:
+  deloyment:
+    docker:
+      - image: cimg/base:2023.03
+    steps:
+      - checkout
+      - run:
+            name: Build and tag
+            command: |
+                docker --version
+                docker build -t udagram-api-feed:v1 ./udagram-api-feed
+                docker tag udagram-api-feed:v1 trind7/udagram-api-feed:v1
+                docker build -t udagram-api-user:v1 ./udagram-api-user  
+                docker tag udagram-api-user:v1 trind7/udagram-api-user:v1
+                docker build -t udagram-frontend:v1 ./udagram-frontend
+                docker tag udagram-frontend:v1 trind7/udagram-frontend:v1
+                docker build -t udagram-reverseproxy:v1 ./udagram-reverseproxy
+                docker tag udagram-reverseproxy:v1 trind7/udagram-reverseproxy:v1
+      - run:
+            name: Push
+            command: |
+                echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+                docker push trind7/udagram-api-feed:v1
+                docker push trind7/udagram-api-user:v1
+                docker push trind7/udagram-api-frontend:v1
+                docker push trind7/udagram-api-reverseproxy:v1
+
+# Orchestrate our job run sequence
+workflows:
+  default:
+    jobs:
+      - deloyment

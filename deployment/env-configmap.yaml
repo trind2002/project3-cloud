@@ -3,9 +3,9 @@ kind: ConfigMap
 metadata:
   name: app-config-map
 data:
-  POSTGRES_HOST: uda-db-dev.cbwwzd6e103s.us-east-1.rds.amazonaws.com
+  POSTGRES_HOST: mydbcluster.cluster-cobcrvjz8mep.us-east-1.rds.amazonaws.com
   POSTGRES_DB: postgres
-  AWS_BUCKET: udacity-101
+  AWS_BUCKET: udagram-bucket-2605
   AWS_REGION: us-east-1
   AWS_PROFILE: default
   URL: http://localhost:8100

@@ -23,7 +23,7 @@ jobs:
       - run:
             name: Push
             command: |
-                echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+                echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
                 docker push trind7/udagram-api-feed:v1
                 docker push trind7/udagram-api-user:v1
                 docker push trind7/udagram-api-frontend:v1

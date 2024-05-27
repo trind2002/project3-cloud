@@ -32,12 +32,12 @@ jobs:
                 echo 'frontend'
                 docker build -t udagram-frontend:v1 ./udagram-frontend
                 docker tag udagram-frontend:v1 trind7/udagram-frontend:v1
-                docker push trind7/udagram-api-frontend:v1
+                docker push trind7/udagram-frontend:v1
                 # reverseproxy
                 echo 'reverseproxy'
                 docker build -t udagram-reverseproxy:v1 ./udagram-reverseproxy
                 docker tag udagram-reverseproxy:v1 trind7/udagram-reverseproxy:v1
-                docker push trind7/udagram-api-reverseproxy:v1
+                docker push trind7/udagram-reverseproxy:v1
 # Orchestrate our job run sequence
 workflows:
   default:

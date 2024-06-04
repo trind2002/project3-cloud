@@ -9,6 +9,15 @@ kubectl apply -f backend-feed-deployment.yaml
 kubectl apply -f backend-feed-service.yaml
 ## Do the same for other three service files
 
+kubectl apply -f backend-user-deployment.yaml
+kubectl apply -f backend-user-service.yaml
+
+kubectl apply -f reverseproxy-deployment.yaml
+kubectl apply -f reverseproxy-service.yaml
+
+kubectl apply -f frontend-deployment.yaml
+kubectl apply -f frontend-service.yaml
+
 
 Expose External IP
 ## Check the deployment names and their pod status
@@ -17,6 +26,7 @@ kubectl get deployments
 ## The command below will ceates an external load balancer and assigns a fixed, external IP to the Service.
 kubectl expose deployment frontend --type=LoadBalancer --name=publicfrontend
 ## Repeat the process for the *reverseproxy* deployment. 
+kubectl expose deployment reverse-proxy --type=LoadBalancer --name=publicreverseproxy
 ## Check name, ClusterIP, and External IP of all deployments
 kubectl get services 
 kubectl get pods # It should show the STATUS as Running
@@ -31,3 +41,4 @@ docker push [Dockerhub-username]/udagram-frontend:v6
 ## Run these commands from the /udagram-deployment directory
 ## Rolling update the containers of "frontend" deployment
 kubectl set image deployment frontend frontend=[Dockerhub-username]/udagram-frontend:v6
+

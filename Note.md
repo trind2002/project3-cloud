@@ -46,3 +46,13 @@ b. Add the CORS configuration(opens in a new tab)
 cat ~/.aws/credentials | tail -n 5 | head -n 2
 ## Convert 
 cat ~/.aws/credentials | tail -n 5 | head -n 2 | base64
+
+
+Steps to deloyment k8s
+
+1. We can create eks-cluster with the commands:
+https://eksctl.io/usage/creating-and-managing-clusters/
+eksctl create cluster -f ./deployment/ekst.yaml
+eksctl delete cluster -f cluster.yaml
+2. update config
+aws eks update-kubeconfig --region region-code --name my-cluster

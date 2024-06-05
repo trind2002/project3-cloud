@@ -31,6 +31,7 @@ kubectl expose deployment reverse-proxy --type=LoadBalancer --name=publicreverse
 kubectl get services 
 kubectl get pods # It should show the STATUS as Running
 
+kubectl set image deployment frontend udagram-frontend=trind7/udagram-frontend:v1
 
 
 Update the Environment Variables and Re-Deploy the Application

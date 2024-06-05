@@ -5,7 +5,8 @@ metadata:
 data:
   POSTGRES_HOST: postgres.cobcrvjz8mep.us-east-1.rds.amazonaws.com
   POSTGRES_DB: postgres
-  AWS_BUCKET: mybucket040624
+  JWT_SECRET: testing
+  AWS_BUCKET: arn:aws:s3:::mybucket05062024
   AWS_REGION: us-east-1
   AWS_PROFILE: default
   URL: http://localhost:8100

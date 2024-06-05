@@ -30,13 +30,8 @@ spec:
             mountPath: "/root/.aws/"
             readOnly: true
         ports:
-        - containerPort: 5002
+        - containerPort: 8080
         env:
-          - name: POSTGRES_USERNAME
-            valueFrom:
-              configMapKeyRef:
-                name: app-config-map
-                key: POSTGRES_USERNAME
           - name: POSTGRES_HOST
             valueFrom:
               configMapKeyRef:
@@ -47,6 +42,16 @@ spec:
               configMapKeyRef:
                 name: app-config-map
                 key: POSTGRES_DB
+          - name: POSTGRESS_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: env-secret
+                key: POSTGRESS_USERNAME
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: env-secret
+                key: POSTGRES_PASSWORD
           - name: AWS_BUCKET
             valueFrom:
               configMapKeyRef:
@@ -67,13 +72,9 @@ spec:
               configMapKeyRef:
                 name: app-config-map
                 key: URL
-          - name: POSTGRES_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: app-secrets
-                key: postgres_password
+          
           - name: JWT_SECRET
             valueFrom:
               secretKeyRef:
-                name: app-secrets
-                key: jwt_secret
+                name: app-config-map
+                key: JWT_SECRET

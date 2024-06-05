@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: reverse-proxy
+  name: reverseproxy
   labels:
-    part: reverse-proxy
+    part: reverseproxy
 spec:
   replicas: 2
   selector:
     matchLabels:
-      part: reverse-proxy
+      part: reverseproxy
   template:
     metadata:
       labels:
-        part: reverse-proxy
+        part: reverseproxy
     spec:
       containers:
       - name: udagram-reverseproxy
         image: trind7/udagram-reverseproxy
         ports:
-        - containerPort: 80
+        - containerPort: 8080

@@ -2,15 +2,15 @@ apiVersion: eksctl.io/v1alpha5
 kind: ClusterConfig
 
 metadata:
-  name: udagram-eksctl-cluster
+  name: udagram-eksctl
   region: us-east-1
 
 nodeGroups:
   - name: ng-1
-    instanceType: t3.large
+    instanceType: m5.large
     desiredCapacity: 2
     volumeSize: 20
   - name: ng-2
-    instanceType: t3.large
+    instanceType: m5.large
     desiredCapacity: 2
     volumeSize: 20

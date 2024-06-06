@@ -18,6 +18,14 @@ kubectl apply -f reverseproxy-service.yaml
 kubectl apply -f frontend-deployment.yaml
 kubectl apply -f frontend-service.yaml
 
+kubectl delete -f backend-user-deployment.yaml && kubectl apply -f backend-user-deployment.yaml
+kubectl delete -f backend-user-service.yaml && kubectl apply -f backend-user-service.yaml
+
+kubectl delete -f backend-feed-deployment.yaml && kubectl apply -f backend-feed-deployment.yaml
+kubectl delete -f backend-feed-service.yaml && kubectl apply -f backend-feed-service.yaml
+
+
+kubectl delete -f env-configmap.yaml && kubectl apply -f env-configmap.yaml
 
 Expose External IP
 ## Check the deployment names and their pod status

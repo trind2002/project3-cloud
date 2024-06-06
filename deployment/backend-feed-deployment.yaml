@@ -14,67 +14,68 @@ spec:
       labels:
         part: backend-feed
     spec:    
-      volumes:
-        - name: aws-secret
-          secret:
-            secretName: aws-secret
       containers:
       - name: udagram-api-feed
-        image: trind7/udagram-api-feed
+        image: trind7/udagram-api-feed:v3
         resources:
           requests:
             memory: "500Mi"
-            cpu: "250m"
-        volumeMounts:
-          - name: aws-secret
-            mountPath: "/root/.aws/"
-            readOnly: true
+            cpu: "250m"        
         ports:
         - containerPort: 8080
         env:
-          - name: POSTGRESS_USERNAME
+          - name: POSTGRES_USERNAME
             valueFrom:
               secretKeyRef:
                 name: env-secret
-                key: POSTGRESS_USERNAME 
-          - name: POSTGRESS_PASSWORD
+                key: POSTGRES_USERNAME 
+          - name: POSTGRES_PASSWORD
             valueFrom:
               secretKeyRef:
                 name: env-secret
-                key: POSTGRESS_PASSWORD
+                key: POSTGRES_PASSWORD
           - name: POSTGRES_HOST
             valueFrom:
               configMapKeyRef:
-                name: app-config-map
+                name: env-config
                 key: POSTGRES_HOST
           - name: POSTGRES_DB
             valueFrom:
               configMapKeyRef:
-                name: app-config-map
+                name: env-config
                 key: POSTGRES_DB
           - name: AWS_BUCKET
             valueFrom:
               configMapKeyRef:
-                name: app-config-map
+                name: env-config
                 key: AWS_BUCKET
           - name: AWS_REGION
             valueFrom:
               configMapKeyRef:
-                name: app-config-map
+                name: env-config
                 key: AWS_REGION
           - name: AWS_PROFILE
             valueFrom:
               configMapKeyRef:
-                name: app-config-map
+                name: env-config
                 key: AWS_PROFILE
           - name: URL
             valueFrom:
               configMapKeyRef:
-                name: app-config-map
+                name: env-config
                 key: URL
           
           - name: JWT_SECRET
             valueFrom:
               secretKeyRef:
-                name: app-config-map
+                name: env-config
                 key: JWT_SECRET
+        volumeMounts:
+          - name: aws-secret
+            mountPath: "/root/.aws/"
+            readOnly: true
+      restartPolicy: Always
+      volumes:
+        - name: aws-secret
+          secret:
+            secretName: aws-secret

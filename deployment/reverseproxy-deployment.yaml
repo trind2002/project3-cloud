@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: udagram-reverseproxy
-        image: trind7/udagram-reverseproxy
+        image: trind7/udagram-reverseproxy:v3
         ports:
         - containerPort: 8080

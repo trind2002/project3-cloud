@@ -52,7 +52,12 @@ Steps to deloyment k8s
 
 1. We can create eks-cluster with the commands:
 https://eksctl.io/usage/creating-and-managing-clusters/
-eksctl create cluster -f ./deployment/ekst.yaml
-eksctl delete cluster -f cluster.yaml
+eksctl create cluster -f ekst.yaml
+eksctl delete cluster -f ekst.yaml
+
+
+Create EKS
+eksctl create cluster --name myCluster0606 --region=us-east-1 --nodes-min=2 --nodes-max=3
+eksctl delete cluster --region=us-east-2 --name=myCluster0606
 2. update config
-aws eks update-kubeconfig --region region-code --name my-cluster
+aws eks update-kubeconfig --region us-east-2 --name myCluster

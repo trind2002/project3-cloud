@@ -99,7 +99,7 @@ Launch the frontend app locally.
 
 ## Links
 
-http://a3463798ba20643e1a73ce00cf248edd-570699394.us-east-1.elb.amazonaws.com/home
+http://a3463798ba20643e1a73ce00cf248edd-570699394.us-east-1.elb.amazonaws.com
 
 ## Note
 

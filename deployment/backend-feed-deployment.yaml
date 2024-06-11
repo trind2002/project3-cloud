@@ -17,10 +17,21 @@ spec:
       containers:
       - name: udagram-api-feed
         image: trind7/udagram-api-feed:v3
+        imagePullPolicy: Always    
         resources:
           requests:
             memory: "500Mi"
-            cpu: "250m"        
+            cpu: "250m"
+          limits:
+            memory: "1024Mi"
+            cpu: "500m"
+        envFrom:
+        - configMapRef:
+            name: env-config
+        volumeMounts:
+          - name: aws-secret
+            mountPath: "/root/.aws/"
+            readOnly: true
         ports:
         - containerPort: 8080
         env:
@@ -67,13 +78,9 @@ spec:
           
           - name: JWT_SECRET
             valueFrom:
-              secretKeyRef:
+              configMapKeyRef:
                 name: env-config
                 key: JWT_SECRET
-        volumeMounts:
-          - name: aws-secret
-            mountPath: "/root/.aws/"
-            readOnly: true
       restartPolicy: Always
       volumes:
         - name: aws-secret

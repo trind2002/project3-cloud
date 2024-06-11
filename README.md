@@ -71,6 +71,42 @@ Launch the frontend app locally.
     ```
 * You can visit `http://localhost:8100` in your web browser to verify that the application is running. You should see a web interface.
 
+### 5. SCREENSHOTS
+1. Containerize the Code: Create Dockerfiles for the reverse proxy, frontend and backend applications.
+
+![Docker Hub](screenshots/hub-dockers.png)
+
+2. Build CICD Pipeline: 
+
+![Circle CI](screenshots/circleci.png)
+
+3. Pods:
+
+![Pods](screenshots/get-pods.png)
+
+4. Services output
+
+![services](screenshots/describe-services-1.png)
+![services](screenshots/describe-services-2.png)
+
+5. Logs
+
+![Logs](screenshots/logs-pod.png)
+
+6. HPA
+
+![Logs](screenshots/describe-hpa.png)
+
+## Links
+
+http://a3463798ba20643e1a73ce00cf248edd-570699394.us-east-1.elb.amazonaws.com/home
+
+## Note
+
+I used Circle CI to build CICD Pipeline
+Reason: I have not visa card to register at TravisCI
+
+
 ## Tips
 1. Take a look at `udagram-api` -- does it look like we can divide it into two modules to be deployed as separate microservices?
 2. The `.dockerignore` file is included for your convenience to not copy `node_modules`. Copying this over into a Docker container might cause issues if your local environment is a different operating system than the Docker image (ex. Windows or MacOS vs. Linux).

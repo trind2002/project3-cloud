@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: udagram-frontend
-        image: trind7/udagram-frontend:v3
+        image: trind7/udagram-frontend:v4
         ports:
         - containerPort: 80

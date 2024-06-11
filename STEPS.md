@@ -69,6 +69,7 @@ kubectl get deployments
 kubectl delete -f backend-feed-deployment.yaml && kubectl apply -f backend-feed-deployment.yaml
 kubectl delete -f backend-feed-service.yaml && kubectl apply -f backend-feed-service.yaml
 
+kubectl delete -f frontend-deployment.yaml && kubectl apply -f frontend-deployment.yaml
 kubectl create configmap my-config --from-file=/etc/configs
 
 
@@ -78,3 +79,18 @@ kubectl delete -f backend-feed.yaml && kubectl apply -f backend-feed.yaml
 kubectl expose deployment frontend --type=LoadBalancer --name=publicfrontend
 kubectl expose deployment reverseproxy --type=LoadBalancer --name=publicreverseproxy
 
+### 6. Rebuild docker frontend after change env
+
+## Rolling update the containers of "frontend" deployment
+kubectl set image deployment frontend frontend=trind7/udagram-frontend:v4
+kubectl apply -f frontend-deployment.yaml
+
+
+kubectl autoscale deployment backend-user --cpu-percent=70 --min=3 --max=5
+kubectl autoscale deployment backend-feed --cpu-percent=70 --min=3 --max=5
+
+
+Kubernetes kubectl get pods output
+Kubernetes kubectl describe services output
+Kubernetes kubectl describe hpa output
+Kubernetes kubectl logs <your pod name> output
